@@ -69,6 +69,26 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths"/>
         </provider>
+              
+         <activity
+    android:name="com.draco.ladb.plugin.EditCommandActivity"
+    android:exported="true"
+    android:icon="@mipmap/ic_launcher"
+    android:label="Ejecutar comando ADB (LADB)"
+    android:theme="@style/Theme.LADB">
+    <intent-filter>
+        <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
+    </intent-filter>
+</activity>
+
+<receiver
+    android:name="com.draco.ladb.plugin.FireReceiver"
+    android:exported="true">
+    <intent-filter>
+        <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />
+    </intent-filter>
+</receiver>
+              
     </application>
 
 </manifest>
