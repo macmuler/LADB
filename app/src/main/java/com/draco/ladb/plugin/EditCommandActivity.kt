@@ -3,18 +3,22 @@ package com.draco.ladb.plugin
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import com.joaomgcd.taskerpluginlibrary.config.TaskerPluginConfig
 import com.joaomgcd.taskerpluginlibrary.config.TaskerPluginConfigHelper
 import com.joaomgcd.taskerpluginlibrary.input.TaskerInput
-import androidx.appcompat.app.AppCompatActivity
 
 class EditCommandActivity : AppCompatActivity(), TaskerPluginConfig<CommandInput> {
 
     override val context get() = applicationContext
-    override val inputForTasker get() = TaskerInput(CommandInput(
-        command = editComando.text.toString(),
-        timeoutMs = editTimeout.text.toString().toLongOrNull() ?: 15000L
-    ))
+
+    override val inputForTasker
+        get() = TaskerInput(
+            CommandInput(
+                command = editComando.text.toString(),
+                timeoutMs = editTimeout.text.toString().toLongOrNull() ?: 15000L
+            )
+        )
 
     private lateinit var editComando: EditText
     private lateinit var editTimeout: EditText
@@ -48,12 +52,9 @@ class EditCommandActivity : AppCompatActivity(), TaskerPluginConfig<CommandInput
         helper.onCreate()
     }
 
-    override fun onPostCreateWithPreviousResult(input: TaskerInput<CommandInput>, previousBlurb: String) {
-        assignFromInput(input)
-    }
-
     override fun onBackPressed() {
         helper.finishForTasker()
+        super.onBackPressed()
     }
 }
 
