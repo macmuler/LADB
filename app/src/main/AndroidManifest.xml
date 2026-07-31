@@ -81,13 +81,7 @@
     </intent-filter>
 </activity>
 
-<receiver
-    android:name="com.draco.ladb.plugin.FireReceiver"
-    android:exported="true">
-    <intent-filter>
-        <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />
-    </intent-filter>
-</receiver>
+
               
     </application>
 
