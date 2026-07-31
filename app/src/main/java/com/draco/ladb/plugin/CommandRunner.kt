@@ -12,14 +12,17 @@ class CommandRunner : TaskerPluginRunnerAction<CommandInput, CommandOutput>() {
         val comando = input.regular.command.trim()
 
         if (comando.isEmpty()) {
-            throw IllegalArgumentException("El comando esta vacio")
+            return TaskerPluginResultSucess(
+                CommandOutput(output = "ERROR: el comando esta vacio", success = false)
+            )
         }
 
-        val salida = AdbShellManager.sendCommand(
-            context,
-            comando,
-            input.regular.timeoutMs
-        )
+        val salida = try {
+            AdbShellManager.sendCommand(context, comando, input.regular.timeoutMs)
+        } catch (e: Exception) {
+            "ERROR: ${e.message ?: "error desconocido ejecutando el comando"}"
+        }
+
         val huboError = salida.startsWith("ERROR:")
 
         return TaskerPluginResultSucess(CommandOutput(output = salida, success = !huboError))
